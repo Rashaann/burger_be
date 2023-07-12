@@ -3,8 +3,10 @@ const Burger = require('../models/burgers');
 var router = express.Router();
 
 /* GET list of burgers */
-router.get('/', (req, res) => {
-    res.json({result: true, list: data});
+router.get('/all', (req, res) => {
+    Burger.find().then(data => {
+        res.json({result: true, list: data});
+    })
 });
 
 
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
 router.post('/addBurger', (req, res) => {
     const today = new Date();
     Burger.find().then(burgers => {
-        console.log(burgers);
+        //console.log(burgers);
         if(!burgers.includes(e => e.id === req.body.id)){
             const newBurger = new Burger({
                 id: req.body.id,
